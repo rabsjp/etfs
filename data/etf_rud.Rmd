@@ -1,0 +1,52 @@
+---
+title: "ETFs in laboratory asset markets"
+author: J. Duffy, JP Rabanal, O Rud, 
+
+output: revealjs::revealjs_presentation
+---
+
+## Research question
+
+- Does the ETFs affect price discovery? 
+
+## Market Design
+
+- 3 assets: A, B and C, where $C= A + B$
+- T = 15 periods
+- dividend streams: 
+  - A pays 1 or -1 
+  - B pays the opposite of A in all periods. Starting from t=8, pays plus 1. 
+- FVs
+  - $FV_{{A,t}}= 10$
+  - $FV_{B,t}=\left\{\begin{array}{ll} 180 & \mbox{for}\ t \leq 8 \\
+            (T-t+1)10 + 100 & \mbox{for}\ t > 8
+            \end{array} \right.$
+  - $FV_{C,t}=\left\{\begin{array}{ll} 280 & \mbox{for}\ t \leq 8 \\
+            (T-t+1)10 + 200 & \mbox{for}\ t > 8
+            \end{array} \right.$
+
+## Experimental Design
+
+- Each market, 9 players
+- Endowments of (A,B,C,cash)
+  - 
+
+## Market prices
+
+```{r,echo=FALSE}
+source("/cloud/project/project/getdata.R")
+plot(df$subsession.round_number,df$group.p_c,ylim=c(0,100),col="blue",xaxt = "n",xlab="period",ylab = "prices")
+axis(1, at=c(1:15,18:32), labels=c(1:15,1:15))
+lines(df$subsession.round_number,df$group.nav,col="blue")
+points(df$subsession.round_number,df$group.p_a,col="gray",pch=2)
+#lines(df$subsession.round_number,df$group.nav_a,col="black")
+points(df$subsession.round_number,df$group.p_b,col="red",pch=3)
+#lines(df$subsession.round_number,df$group.nav_b,col="red")
+```
+
+## Slide with Plot
+
+```{r, echo=FALSE}
+plot(cars)
+```
+
