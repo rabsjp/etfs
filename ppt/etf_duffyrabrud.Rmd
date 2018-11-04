@@ -1,6 +1,6 @@
 ---
 title: "ETFs in laboratory asset markets"
-author: J. Duffy, JP Rabanal, O Rud, 
+author: J. Duffy (UC Irvine), J.P. Rabanal (Monash U), O. Rud (Unimelb), 
 
 output: revealjs::revealjs_presentation
 ---
@@ -26,9 +26,34 @@ output: revealjs::revealjs_presentation
 
 ## Experimental Design
 
-- Each market, 9 players
-- Endowments of (A,B,C,cash)
-  - 
+- Each session, 9 players, 2 big markets
+- One market is randomly paid 
+- In a big market, we have 3 Call Markets (one market per asset)
+- Endowments of (A, B, C,cash) according to type
+
+```{r echo=FALSE, results= 'asis'}
+e_1<-c(8,2,0,444)
+e_2<-c(2,8,0,396)
+e_3<-c(0,0,10,280)
+table_endowments<-rbind(e_1,e_2,e_3)
+colnames(table_endowments)<-c("A","B","C","cash")
+rownames(table_endowments)<-c("type I","type II", "type III")
+
+library(knitr)
+kable(table_endowments,caption="Endowments")
+```
+
+## Experimental Design
+- UI in oTree (developed by the authors)
+![](/cloud/project/project/figures/ETFS_screenshot.png)
+- Subjects from UC Irvine 
+- Two pilots run last week
+
+
+## Pilot results
+- 2 sessions
+- One closer to FVs
+- Another with bubbles that do not burst
 
 ## Market prices
 ![](/cloud/project/project/figures/prices.png)
@@ -39,6 +64,23 @@ output: revealjs::revealjs_presentation
 ## Portfolio balance A-B
 ![](/cloud/project/project/figures/dport.png){width=40%} ![](/cloud/project/project/figures/difport.png){width=40%}
 
+## holdings A, B and C
+![](/cloud/project/project/figures/holdings_ga.png){width=30%} ![](/cloud/project/project/figures/holdings_gb.png){width=30%} ![](/cloud/project/project/figures/holdings_gc.png){width=30%}
+
+
+## Market prices
+![](/cloud/project/project/figures/prices1.png)
+
+## Market quantities
+![](/cloud/project/project/figures/marketq1.png) 
+
+## Portfolio balance A-B
+![](/cloud/project/project/figures/dport1.png){width=40%} ![](/cloud/project/project/figures/difport1.png){width=40%}
+
 ## holdings A,B,C
-![](/cloud/project/project/figures/dport.png){width=40%} ![](/cloud/project/project/figures/difport.png){width=40%}
+![](/cloud/project/project/figures/holdings_ga1.png){width=30%} ![](/cloud/project/project/figures/holdings_gb1.png){width=30%} ![](/cloud/project/project/figures/holdings_gc1.png){width=30%}
+
+
+
+
 
