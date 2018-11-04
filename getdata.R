@@ -1,7 +1,7 @@
 rm(list = ls())
-setwd("/cloud/project/project/data/")
+setwd("/cloud/project/data/")
 files = list.files(pattern="etfs.*")
-filename<-files[2]
+filename<-files[1]
 df<-read.csv(filename,sep=",",header=T, stringsAsFactors = FALSE)
 
 important_names<-c(1,14:57)
@@ -20,12 +20,6 @@ df$bgroup<-ave(df$player.n_b,df$typeperiod,FUN=function(x) sum(x, na.rm=T))
 df$cgroup<-ave(df$player.n_c,df$typeperiod,FUN=function(x) sum(x, na.rm=T))
 df$portype<-ave(df$portab,df$typeperiod,FUN=function(x) sum(x, na.rm=T))
 df$portdiftype<-ave(df$portdifab,df$typeperiod,FUN=function(x) sum(x, na.rm=T))
-
-
-#plot(df$subsession.round_number,df$portgroup,ylim=c(0,500),col="blue")
-
-#plot(df$subsession.round_number[df$type==0],df$portype[df$type==0],ylim=c(0,500),col="blue")
-#plot(df$subsession.round_number,df$group.p_b-df$group.p_a,ylim=c(-40,40),col="blue",xaxt = "n",xlab="period",ylab = "prices")
 
 pdf("prices.pdf")
 plot(df$subsession.round_number,df$group.p_c,ylim=c(0,100),col="blue",xaxt = "n",xlab="period",ylab = "prices")
