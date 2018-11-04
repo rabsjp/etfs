@@ -1,0 +1,44 @@
+---
+title: "ETFs in laboratory asset markets"
+author: J. Duffy, JP Rabanal, O Rud, 
+
+output: revealjs::revealjs_presentation
+---
+
+## Research question
+
+- Does the ETFs affect price discovery? 
+
+## Market Design
+
+- 3 assets: A, B and C, where $C= A + B$
+- T = 15 periods
+- dividend streams: 
+  - A pays 1 or -1 
+  - B pays the opposite of A in all periods. Starting from t=8, pays plus 1. 
+- $FV_{{A,t}}= 10$
+- $FV_{B,t}=\left\{\begin{array}{ll} 18 & \mbox{for}\ t \leq 8 \\
+            (T-t+1)10 + 10 & \mbox{for}\ t > 8
+            \end{array} \right.$
+- $FV_{C,t}=\left\{\begin{array}{ll} 28 & \mbox{for}\ t \leq 8 \\
+            (T-t+1)10 + 20 & \mbox{for}\ t > 8
+            \end{array} \right.$
+
+## Experimental Design
+
+- Each market, 9 players
+- Endowments of (A,B,C,cash)
+  - 
+
+## Market prices
+![](/cloud/project/project/figures/prices.png)
+
+## Market quantities
+![](/cloud/project/project/figures/marketq.png) 
+
+## Portfolio balance A-B
+![](/cloud/project/project/figures/dport.png){width=40%} ![](/cloud/project/project/figures/difport.png){width=40%}
+
+## holdings A,B,C
+![](/cloud/project/project/figures/dport.png){width=40%} ![](/cloud/project/project/figures/difport.png){width=40%}
+
