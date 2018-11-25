@@ -1,35 +1,59 @@
 ---
 title: "ETFs in laboratory asset markets"
-author: J. Duffy (UC Irvine), J.P. Rabanal (Monash U), O. Rud (Unimelb), 
+author: J. Duffy (UC Irvine), J.P. Rabanal (Monash U), O. Rud (U Melbourne), 
 
 output: revealjs::revealjs_presentation
 ---
 
-## Research question
 
-- Does the ETFs affect price discovery? 
+## Motivation 
 
-## Market Design
+- Exchange-Traded Funds (ETF) under management are $4.3 trillion in September 2017 exceeding the hedge fund industry (Lettau and Madhavan, 2018)
 
-- 3 assets: A, B and C, where $C= A + B$
+- An ETF is an investment vehicle that typically seeks to track the performance of a specific index, like an index mutual fund does.
+
+## Motivation 
+How do ETFs affect
+
+- price discovery
+- trading volume
+- free riding
+- diversification
+
+## Motivation 
+Type of ETF:
+
+- does it cover the  market?
+- correlation between assets
+- FV process
+
+## Experimental Design
+
+- 2 x 2 design
+- ETF vs. no ETF 
+- $\rho\in (-1,0)$ 
+
+
+## Experimental Design
+- A, B and C, where $C= A + B$
 - T = 15 periods
 - dividend streams: 
   - A pays 1 or -1 
   - B pays the opposite of A in all periods. Starting from t=8, pays plus 1. 
 - $FV_{{A,t}}= 10$
 - $FV_{B,t}=\left\{\begin{array}{ll} 18 & \mbox{for}\ t \leq 8 \\
-            (T-t+1)10 + 10 & \mbox{for}\ t > 8
+            (T-t+1) + 10 & \mbox{for}\ t > 8
             \end{array} \right.$
 - $FV_{C,t}=\left\{\begin{array}{ll} 28 & \mbox{for}\ t \leq 8 \\
-            (T-t+1)10 + 20 & \mbox{for}\ t > 8
+            (T-t+1) + 20 & \mbox{for}\ t > 8
             \end{array} \right.$
 
 ## Experimental Design
 
-- Each session, 9 players, 2 big markets
-- One market is randomly paid 
-- In a big market, we have 3 Call Markets (one market per asset)
-- Endowments of (A, B, C,cash) according to type
+- Each session: 9 players, 2 big markets
+- One market is randomly paid (avoid wealth effects)
+- One call market per asset
+- Endowments of (A, B, C, cash) according to player type
 
 ```{r echo=FALSE, results= 'asis'}
 e_1<-c(8,2,0,444)
@@ -45,40 +69,93 @@ kable(table_endowments,caption="Endowments")
 
 ## Experimental Design
 - UI in oTree (developed by the authors)
-![](/cloud/project/project/figures/ETFS_screenshot.png)
-- Subjects from UC Irvine 
-- Two pilots run last week
+![](/cloud/project/figures/ETFS_screenshot.png)
+- Subjects: students from UC Irvine 
 
 
-## Pilot results
-- 2 sessions
-- One closer to FVs
-- Another with bubbles that do not burst
+## Results
+
+- Relative absolute deviation from fundamentals
+$$DF =  \frac{1}{T}\sum |\frac{P}{F}-1 |$$
+
+```{r echo=FALSE, results= 'asis'}
+mrae_1<-c(1.64, 0.83, 1.30) # mrae_a    mrae_b   mrae_c 
+mrae_2<-c(1.10, 0.78, 1.01)
+mdp_1<-c(0.15, 0.21,0.55) #mdp_ba    mdp_ca    mdp_cb
+mdp_2<-c(0.11,0.24,0.38)
+table_mrae<-rbind(mrae_1,mrae_2)
+colnames(table_mrae)<-c("A","B","C")
+rownames(table_mrae)<-c("1","2")
+
+table_mpd<-rbind(mdp_1,mdp_2)
+colnames(table_mpd)<-c("B/A","C/A","C/B")
+rownames(table_mpd)<-c("1","2")
+
+library(knitr)
+kable(table_mrae,caption="DF")
+```
+
+## Results
+
+- Relative difference from parity pricing 
+$$\Delta_{t} =  \frac{P_j}{P_i + F_j-F_i}-1 $$
+
+- Cross-asset price discrepancy,
+$$PD = \frac{1}{T}\sum \Delta_{t}$$
+
+```{r echo=FALSE, results= 'asis'}
+library(knitr)
+kable(table_mpd,caption="PD")
+```
 
 ## Market prices
-![](/cloud/project/project/figures/prices.png)
+![](/cloud/project/figures/prices1.png)
 
 ## Market quantities
-![](/cloud/project/project/figures/marketq.png) 
+![](/cloud/project/figures/marketq1.png) 
 
 ## Portfolio balance A-B
-![](/cloud/project/project/figures/dport.png){width=40%} ![](/cloud/project/project/figures/difport.png){width=40%}
-
-## holdings A, B and C
-![](/cloud/project/project/figures/holdings_ga.png){width=30%} ![](/cloud/project/project/figures/holdings_gb.png){width=30%} ![](/cloud/project/project/figures/holdings_gc.png){width=30%}
-
-
-## Market prices
-![](/cloud/project/project/figures/prices1.png)
-
-## Market quantities
-![](/cloud/project/project/figures/marketq1.png) 
-
-## Portfolio balance A-B
-![](/cloud/project/project/figures/dport1.png){width=40%} ![](/cloud/project/project/figures/difport1.png){width=40%}
+![](/cloud/project/figures/dport1.png){width=40%} ![](/cloud/project/figures/difport1.png){width=40%}
 
 ## holdings A,B,C
-![](/cloud/project/project/figures/holdings_ga1.png){width=30%} ![](/cloud/project/project/figures/holdings_gb1.png){width=30%} ![](/cloud/project/project/figures/holdings_gc1.png){width=30%}
+![](/cloud/project/figures/holdings_ga1.png){width=30%} ![](/cloud/project/figures/holdings_gb1.png){width=30%} ![](/cloud/project/figures/holdings_gc1.png){width=30%}
+
+## Two Assets
+
+
+```{r echo=FALSE, results= 'asis'}
+mrae_1<-c(0.21, 0.26, 0.27) # mrae_a    mrae_b  
+mrae_2<-c(0.79, 0.34, 0.21)
+table_mrae<-rbind(mrae_1,mrae_2)
+colnames(table_mrae)<-c("DF A","DF B","PD B/A")
+rownames(table_mrae)<-c("1","2")
+
+library(knitr)
+kable(table_mrae,caption="Measures")
+```
+
+## Market prices
+![](/cloud/project/figures/prices.png)
+
+## Market quantities
+![](/cloud/project/figures/marketq.png) 
+
+## Portfolio balance A-B
+![](/cloud/project/figures/dport.png){width=40%} ![](/cloud/project/figures/difport.png){width=40%}
+
+## holdings A,B
+![](/cloud/project/figures/holdings_ga.png){width=30%}
+![](/cloud/project/figures/holdings_gb.png){width=30%} 
+![](/cloud/project/figures/holdings_gc.png){width=30%}
+
+## Ongoing work
+
+- ETFs in a CAPM framework (Bossaerts, Duffy, Fattinger, Rabanal and Rud) 
+
+
+
+
+
 
 
 
