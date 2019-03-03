@@ -1,19 +1,63 @@
 rm(list = ls())
-setwd("/cloud/project/data/")
+#setwd("/cloud/project/data/")
+setwd("~/Desktop/jotarepos/etfs/data/")
 
 ## Call the data. unique id per session. 
 load("etfmarket.Rda")
 
-imp_sessions<-c("3011")
-dplot<-df[df$uses==imp_sessions,]
-png("prices3.png")
-plot(dplot$subsession.round_number,dplot$group.p_c,ylim=c(0,80),col="blue",xaxt = "n",xlab="period",ylab = "prices")
-axis(1, at=c(1:15), labels=c(1:15))
-lines(dplot$subsession.round_number,dplot$group.nav,col="black")
-points(dplot$subsession.round_number,dplot$group.p_a,col="gray",pch=2)
-points(dplot$subsession.round_number,dplot$group.p_b,col="red",pch=3)
-lines(dplot$subsession.round_number,dplot$fva,col="gray")
-lines(dplot$subsession.round_number,dplot$fvb,col="red")
-lines(dplot$subsession.round_number,dplot$fvc,col="blue")
-legend(10, 70, c("NAV","C","B","A","FV A","FV B", "FV C"), col = c("black","blue","red","gray","gray","red","blue"), pch = c(NA,1,3,2,NA,NA,NA),lty = c(1,NA,NA,NA,1,1,1),bty = "n")
-dev.off()
+## We start with 3 assets and -1 correlation
+listofsessions<-c("31011","31021")
+
+for(imp_sessions in listofsessions){
+  dplot<-df[df$uses==imp_sessions,]
+  png(paste("prices",imp_sessions,".png",sep=""))
+  plot(dplot$subsession.ronda,dplot$group.p_a,ylim=c(0,80),col="gray",xaxt = "n",xlab="period",ylab = "prices",pch=2)
+  axis(1, at=c(1:15), labels=c(1:15))
+  lines(dplot$subsession.ronda,dplot$fva,col="gray")
+  points(dplot$subsession.ronda,dplot$group.p_b,col="red",pch=3)
+  lines(dplot$subsession.ronda,dplot$fvb,col="red")
+  points(dplot$subsession.ronda,dplot$group.p_c,col="blue",pch=1)
+  lines(dplot$subsession.ronda,dplot$fvc,col="blue")
+  lines(dplot$subsession.ronda,dplot$group.nav,col="black",lty=2)
+  legend(2, 75, c("A","FV A","B","FV B","C","FV C", "NAV"), col = c("gray","gray","red","red","blue","blue","black"), pch = c(2,NA,3,NA,1,NA,NA),lty = c(NA,1,NA,1,NA,1,2),bty = "n",ncol=4)
+  dev.off()
+}
+
+for(imp_sessions in listofsessions){
+  dplot<-df[df$uses==imp_sessions,]
+  png(paste("qs",imp_sessions,".png",sep=""))
+  plot(dplot$subsession.ronda,cumsum(dplot$group.q_a)/90,ylim=c(0,1),col="gray",type="l",xaxt = "n",xlab="period",ylab = "cumulative quantity (as a fraction of total assets 90)")
+  axis(1, at=c(1:15), labels=c(1:15))
+  lines(dplot$subsession.ronda,cumsum(dplot$group.q_b)/90,col="red")
+  lines(dplot$subsession.ronda,cumsum(dplot$group.q_c)/90,col="blue")
+  legend(2, .9, c("A","B","C"), col = c("gray","red","blue"),lty = c(1,1,1),bty = "n")
+  dev.off()
+}
+
+
+## Now, 2 assets and -1 correlation
+listofsessions<-c("21011","21021")
+
+for(imp_sessions in listofsessions){
+  dplot<-df[df$uses==imp_sessions,]
+  png(paste("prices",imp_sessions,".png",sep=""))
+  plot(dplot$subsession.ronda,dplot$group.p_a,ylim=c(0,50),col="gray",xaxt = "n",xlab="period",ylab = "prices",pch=2)
+  axis(1, at=c(1:15), labels=c(1:15))
+  lines(dplot$subsession.ronda,dplot$fva,col="gray")
+  points(dplot$subsession.ronda,dplot$group.p_b,col="red",pch=1)
+  lines(dplot$subsession.ronda,dplot$fvb,col="red")
+  legend(10.5, 48, c("A","FV A","B","FV B"), col = c("gray","gray","red","red"), pch = c(2,NA,1,NA),lty=c(NA,1,NA,1),bty="n",ncol=2)
+  dev.off()
+}
+
+for(imp_sessions in listofsessions){
+  dplot<-df[df$uses==imp_sessions,]
+  png(paste("qs",imp_sessions,".png",sep=""))
+  plot(dplot$subsession.ronda,cumsum(dplot$group.q_a)/120,ylim=c(0,1),col="gray",type="l",xaxt = "n",xlab="period",ylab = "cumulative quantity (as a fraction of total assets 120)")
+  axis(1, at=c(1:15), labels=c(1:15))
+  lines(dplot$subsession.ronda,cumsum(dplot$group.q_b)/120,col="red")
+  legend(2, .9, c("A","B"), col = c("gray","red"),lty = c(1,1),bty = "n")
+  dev.off()
+}
+
+
