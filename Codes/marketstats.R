@@ -1,6 +1,6 @@
 rm(list = ls())
-setwd("/cloud/project/data/")
-
+#setwd("/cloud/project/data/")
+setwd("~/Desktop/jotarepos/etfs/data/")
 ## Call the data. unique id per session. 
 load("etfmarket.Rda")
 
