@@ -52,27 +52,45 @@ turnover<-function(q1,id){
   return(tov)
 }
 
+rae(df$group.p_c,df$group.nav,df$uses)
+rae(df$group.p_c,df$group.nav,df$uses)
 
 
 abs((df$group.p_b/(df$group.p_a))/(df$fvb/df$fva)-1)
 pa(df$group.p_a,df$fva,df$uses)
 
-rae(df$group.p_a,df$fva,df$uses)
-wrae(df$group.p_a,df$fva,df$group.q_a,df$uses)
+rae_a<-rae(df$group.p_a,df$fva,df$uses)
+rae_b<-rae(df$group.p_b,df$fvb,df$uses)
+rae_c<-rae(df$group.p_c,df$fvc,df$uses)
+rae_cnav<-rae(df$group.p_c,df$group.nav,df$uses)
 
-dpj(df$group.p_b,df$fvb,df$group.p_a,df$fva,df$uses)
+wrae_a<-wrae(df$group.p_a,df$fva,df$group.q_a,df$uses)
+wrae_b<-wrae(df$group.p_b,df$fvb,df$group.q_b,df$uses)
+wrae_c<-wrae(df$group.p_c,df$fvc,df$group.q_c,df$uses)
+wrae_cnav<-wrae(df$group.p_c,df$group.nav,df$group.q_c,df$uses)
 
 
-nses<-4
+rap<-rapdpj(df$group.p_b,df$fvb,df$group.p_a,df$fva,df$uses)
+raes<-rbind(rae_a,rae_b,rae_c,rae_cnav,rap)
+wraes<-rbind(wrae_a,wrae_b,rae_c,wrae_cnav)
+
+
+nses<-8
 totala<- c(rep(20*3,nses),rep(10*3,nses))
 totalb<- c(rep(20*3,nses),rep(10*3,nses))
 totalc<- c(rep(20*3,nses),rep(10*3,nses))
 
-turnover(df$group.q_a,df$uses)/totala*100
-turnover(df$group.q_b,df$uses)/totalb*100
-turnover(df$group.q_c,df$uses)/totalc*100
+turnover_a<-turnover(df$group.q_a,df$uses)/totala*100
+turnover_b<-turnover(df$group.q_b,df$uses)/totalb*100
+turnover_c<-turnover(df$group.q_c,df$uses)/totalc*100
 
-disperse(df$group.p_a,df$uses)
+vueltas<-rbind(turnover_a,turnover_b,turnover_c)
+
+vol_a<-disperse(df$group.p_a,df$uses)
+vol_b<-disperse(df$group.p_b,df$uses)
+vol_c<-disperse(df$group.p_c,df$uses)
+
+volatilities<-rbind(vol_a,vol_b,vol_c)
 
 
 cor(df$group.p_a[df$uses==2010],df$group.p_b[df$uses==2010],use="complete.obs")

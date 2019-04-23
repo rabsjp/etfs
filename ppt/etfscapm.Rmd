@@ -1,0 +1,138 @@
+---
+title: "ETFs ideas "
+output: html_notebook
+---
+
+## CAPM (Bossearts, et al.)
+
+- investors trade assets $\emph{A,B, N}$, which are calims to state-dependent consumption. 
+
+- three states,s$\in$ {X,Y,Z}
+
+- div A is the dividend promised in state s
+
+- $\theta=(\theta_A,\theta_B,\theta_N)$ is a portfolio of assets. 
+
+$$
+div \theta = \theta_A (div A) + \theta_B(div B)+\theta_N(div N)
+$$
+where $div N = 0$ 
+
+- investors  ($I$ in total) have an endowment of assets $\omega=(\omega_A,\omega_B,\omega_C)$
+
+- therefore, the budget constraints with asset prices $q$, 
+
+$$
+q \theta \leq q \omega
+$$  
+- market clearing condition (demand = supply of assets)
+$$
+\sum \theta =\sum  \omega
+$$  
+- market portfolio of all assets $M=\sum w$ while the market portfolio of risky assets $m=\sum (\omega_A,\omega_B)$, and per capita $\bar{m}=m/I$
+
+- expected dividends $\mu = (E(A),E(B))$, and the covariance matrix of risky assets, 
+$$
+\Delta = 
+\begin{bmatrix}
+cov[A,A] & cov[A,B] \\
+cov[A,B] & cov[B,B]\\
+end{bmatrix}
+$$
+assuming  mean-variance investors
+$$
+u(c)= E(c)-\frac{b}{2}Var(c)
+$$
+the CAPM equilibrium for prices 
+$$
+p^* = \mu - (\frac{1}{I}\sum \frac{1}{b})^{-1} \Delta \bar{m}
+$$
+and demand
+$$
+z(p^*) = \frac{1}{b} \Delta^{-1} (\mu-p)
+$$
+The sharpe ratio of $\theta$ is the ratio of excess return (note that return of notes is 1)
+
+$$
+ShR(\theta) = \frac{E[Div \theta/q\cdot \theta]-1}{\sqrt{Var[Div \theta/q\cdot \theta]}}
+$$
+
+The market portfolio is mean-variance efficient if and only if the market portfolio has the largest Sharpe ratio among all portfolios, so the difference between the max. Sharpe ratio of any portfolio and the Sharpe ratio of the market portfolio, 
+$$
+\max_{\theta} \gamma^S = ShR(\theta) - ShR(m)
+$$
+it measures the **deviation of the market portfolio from mean-variance efficiency**. 
+
+Now, we measure the investor's holding against the market. Portfolio separation predicts that investors each investor's holding of risky assets should be a nonnegative multiple of the market portfolio of risky assets. So they look at the fraction of asset A in the portfolio, 
+
+$$
+HM = \frac{1}{I} \sum |\frac{p_A\cdot \omega_A}{p\cdot \omega}-\frac{p_A\cdot m_a}{p\cdot m} |
+$$
+- in general they find that $\gamma^s \approx 0 $ but $HM\neq 0$. one would argue that ETF replicates the market and help subjects separating their portfolio (under mean-variance investors). 
+
+### Experimental design
+
+- Three assets: 
+
+* Notes (risk-free). allowing borrowing/lending
+* A and B with no short-sale
+
+- All assets are traded with cash
+
+- subjects who accumulating earnings at the end of the period are not sufficient to repay their loan are bankrupt; subject who are bankrupt for two consecutives trading periods are barred from trading in future periods. 
+
+- they focus on two main variables, whether the max sharpe-ratio can be achieved given prices, and the portfolio allocation (separation that you hold a fraction of the market)
+
+- 
+
+## ETF in updating prices
+
+- continuum of agents
+
+- two assets $R$ and $B$ Arrow Securities, in that state pay one unit of wealth and the other pays no wealth
+
+- two states, $r$ and $b$
+
+- date 0 the realization of the state is unknown
+
+- date 1 Ss learn the realization of the state, securities payoff, and eat!
+
+- $\pi_r$ be prob. that state $r$ occurs, and $\pi_b = 1- \pi_r$
+
+- assume $\alpha$ update properly, $\pi^i_r = \pi_r$ , the others $j$ $(1-\alpha)$ do not, such that 
+
+$$
+\pi^j_r = \pi_L + \frac{\pi_r - \pi_L}{1-\alpha}\times j 
+$$
+where $\pi_L$ is the lowest belief. 
+
+- two treatments: 
+
+  - I, endowment with an equal number of R and B, so there is NOT aggregate risk. 
+  - II, units of B > units of R. Specifically, $B = 1.16\times R$
+
+- $p$ is the market price of asset R at date 0. therefore the price of B is $1-p$
+
+Under treatment I, 
+
+$\omega^0 = p 1 + (1-p) 1 = 1$ so optimization is 
+
+$$
+\max \pi_r ln (R) + (1-\pi_r) ln(B) s.t p R + (1-p) B = 1
+$$
+so, the foc are
+
+$$
+R  = \frac{\pi_r}{p},B  = \frac{1-\pi_r}{1-p} 
+$$
+### Experiments
+
+- three assets, R, B and N. 
+
+- 
+
+
+
+```{r}
+plot(cars)
+```

@@ -1,0 +1,28 @@
+---
+title: "Pricing Exchange Traded Funds in laboratory markets"
+author: J. Duffy (UC Irvine), J.P. Rabanal (Monash U), O. Rud (RMIT University), 
+
+output: html_document
+---
+
+## Description
+The paper studies the impact of Exchange Traded Funds (ETFs) in the price discovery and trading participation of laboratory asset markets. 
+
+
+## Methodology
+We design a standard asset market environment using experimental methods. We design markets with/without ETF and vary the correlation of assets. 
+
+## Data
+We employ undergraduate student in laboratory sessions. Currently, we have four markets. 
+
+## Outcomes
+We have the following hypotheses that we will test using our experimental data. 
+
+- **Hypothesis 1:** A market with ETF ($3N$ and $3Z$ treatments) will experience better price discovery compared to a market without ETF ($2N$ and $2Z$ treatments).
+
+- **Hypothesis 2:** The improvement in price discovery is greater in the zero correlation treatments relative to the perfectly correlated treatments.
+
+- **Hypothesis 3:** A market with ETF ($3N$ and $3Z$) decreases price volatility compared to a market without ETF ($2N$ and $2Z$)
+
+- **Hypothesis 4:**  A market with ETF ($3N$ and $3Z$) does not decrease the frequency of trading
+

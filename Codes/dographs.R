@@ -6,7 +6,7 @@ setwd("~/Desktop/jotarepos/etfs/data/")
 load("etfmarket.Rda")
 
 ## We start with 3 assets and -1 correlation
-listofsessions<-c("31011","31021")
+listofsessions<-c("30010","30011")
 
 for(imp_sessions in listofsessions){
   dplot<-df[df$uses==imp_sessions,]
@@ -36,7 +36,7 @@ for(imp_sessions in listofsessions){
 
 
 ## Now, 2 assets and -1 correlation
-listofsessions<-c("21011","21021")
+listofsessions<-c("20011","20021")
 
 for(imp_sessions in listofsessions){
   dplot<-df[df$uses==imp_sessions,]

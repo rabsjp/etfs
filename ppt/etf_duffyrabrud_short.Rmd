@@ -3,24 +3,29 @@ title: "Pricing Exchange Traded Funds in laboratory markets"
 author: J. Duffy (UC Irvine), J.P. Rabanal (Monash U), O. Rud (RMIT University), 
 
 output: revealjs::revealjs_presentation
+
 ---
 ## Outline
 
 - Motivation
 
+
 - Research question
+
 
 - Design
 
+
 - Preliminary results
+
 
 - Ongoing and future work
 
 ## Motivation 
 
-- Exchange-Traded Funds (ETF) under management are $4.3 trillion in September 2017 exceeding the hedge fund industry (Lettau and Madhavan, 2018)
+- Exchange-Traded Funds (ETF) under management are $4.3 trillion in Sep.17 (Lettau and Madhavan, 2018)
 
-- An ETF seeks to track the performance of a specific index, like an index mutual fund does.
+- An ETF seeks to track the performance of a specific index.
 
 - An ongoing debate about the benefits of ETF. 
 
@@ -48,13 +53,8 @@ How do ETFs affect
 - dividend streams per period, 
     - A pays 1 or -1 
     - Under $\rho=-1$, B pays the opposite of A in all periods. Starting from t=8, pays plus 1. 
-- $FV_{{A,t}}= 10$
-- $FV_{B,t}=\left\{\begin{array}{ll} 18 & \mbox{for}\ t \leq 8 \\
-            (T-t+1) + 10 & \mbox{for}\ t > 8
-            \end{array} \right.$
-- $FV_{C,t}=\left\{\begin{array}{ll} 28 & \mbox{for}\ t \leq 8 \\
-            (T-t+1) + 20 & \mbox{for}\ t > 8
-            \end{array} \right.$
+- termination value of 10 for A and B.    
+
 
 ## Experimental Design
 
@@ -80,3 +80,14 @@ kable(table_endowments,caption="Endowments")
 ![](/Users/jrab0004/Desktop/jotarepos/etfs/figures/ETFS_screenshot.png)
 - Subjects: students from UC Irvine 
 
+## Results [one session 2N]
+![](/Users/jrab0004/Desktop/jotarepos/etfs/figures/paper/prices21011.png)
+
+## Results [one session 2N]
+![](/Users/jrab0004/Desktop/jotarepos/etfs/figures/paper/prices21021.png)
+
+## Results [one session 3N]
+![](/Users/jrab0004/Desktop/jotarepos/etfs/figures/paper/prices31011.png)
+
+## Results [one session 3N]
+![](/Users/jrab0004/Desktop/jotarepos/etfs/figures/paper/prices31021.png)

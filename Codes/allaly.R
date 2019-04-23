@@ -13,6 +13,15 @@ df$finalb[df$subsession.ronda==15]<-df$player.n_b[df$subsession.ronda==15]+df$pl
 listofsessions<-c(31011,31021)
 imp_sessions <- listofsessions[1]
 
+
+
+##Perhaps, one should should for active according to the bid/asks submitted
+attach(df)
+tapply(player.nbida+player.nbidb+player.naska+player.naskb,uses,function(x) sum(x>0, na.rm=T))
+detach(df)
+
+
+
 dplot<-df[df$uses==imp_sessions,]
 
 

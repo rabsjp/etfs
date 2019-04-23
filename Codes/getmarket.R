@@ -22,10 +22,31 @@ for(i in seq(along=files)){
   df<-rbind(df,d)
 }
 
+
+setwd("~/Desktop/jotarepos/etfs/data/abczero")
+files = list.files(pattern="*.csv")
+
+##We create a new identifier that reads d$uses
+### 1 digit: 2 or 3 assets
+### 2 digit: 1 or 0 correlation
+##  3-4 digits: Number of sesion
+##  5 digit: Early 0 or late round 1 
+
+for(i in seq(along=files)){
+  d<-read.csv(files[i],sep=",",header=T, stringsAsFactors = FALSE)
+  d<-d[,important_names]
+  d$tre <- 3
+  d$session<-3000+i
+  d<-d[!duplicated(d), ]
+  df<-rbind(df,d)
+}
+
+
 #setwd("/cloud/project/data/abone")
 setwd("~/Desktop/jotarepos/etfs/data/abone")
 
 files = list.files(pattern="*.csv")
+
 for(i in seq(along=files)){
   d<-read.csv(files[i],sep=",",header=T, stringsAsFactors = FALSE)
   d<-d[,important_names]
@@ -34,6 +55,20 @@ for(i in seq(along=files)){
   d<-d[!duplicated(d), ]
   df<-rbind(df,d)
 }
+
+setwd("~/Desktop/jotarepos/etfs/data/abzero/")
+
+files = list.files(pattern="*.csv")
+
+for(i in seq(along=files)){
+  d<-read.csv(files[i],sep=",",header=T, stringsAsFactors = FALSE)
+  d<-d[,important_names]
+  d$tre <- 2
+  d$session<-2000+i
+  d<-d[!duplicated(d), ]
+  df<-rbind(df,d)
+}
+
 
 df$group.p_a[df$group.p_a==0]<-NA
 df$group.p_b[df$group.p_b==0]<-NA
