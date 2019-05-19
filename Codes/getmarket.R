@@ -9,7 +9,8 @@ files = list.files(pattern="*.csv")
 ##  3-4 digits: Number of sesion
 ##  5 digit: Early 0 or late round 1 
 
-important_names<-c( "group.nav_a","group.nav_b","group.nav", "group.p_a" ,"group.q_a","group.d_a","group.p_b","group.q_b","group.d_b" ,"group.p_c", "group.q_c","group.d_c","subsession.round_number","subsession.ronda")
+important_names<-c( "group.nav_a","group.nav_b","group.nav", "group.p_a" ,"group.q_a","group.d_a","group.p_b","group.q_b","group.d_b" ,"group.p_c", "group.q_c","group.d_c","subsession.round_number","subsession.ronda","player.nbida",
+                    "player.naska", "player.nbidb", "player.naskb", "player.nbidc","player.naskc")
 
 df<-NULL
 
@@ -18,7 +19,7 @@ for(i in seq(along=files)){
   d<-d[,important_names]
   d$tre <- 1
   d$session<-3100+i
-  d<-d[!duplicated(d), ]
+  #d<-d[!duplicated(d), ]
   df<-rbind(df,d)
 }
 
@@ -37,7 +38,7 @@ for(i in seq(along=files)){
   d<-d[,important_names]
   d$tre <- 3
   d$session<-3000+i
-  d<-d[!duplicated(d), ]
+  #d<-d[!duplicated(d), ]
   df<-rbind(df,d)
 }
 
@@ -52,7 +53,7 @@ for(i in seq(along=files)){
   d<-d[,important_names]
   d$tre <- 0
   d$session<-2100+i
-  d<-d[!duplicated(d), ]
+  #d<-d[!duplicated(d), ]
   df<-rbind(df,d)
 }
 
@@ -65,9 +66,16 @@ for(i in seq(along=files)){
   d<-d[,important_names]
   d$tre <- 2
   d$session<-2000+i
-  d<-d[!duplicated(d), ]
+  #d<-d[!duplicated(d), ]
   df<-rbind(df,d)
 }
+
+df$active_a<-(df$player.nbida+df$player.naska)*9
+df$active_b<-(df$player.nbidb+df$player.naskb)*9
+df$active_c<-(df$player.nbidc+df$player.naskc)*9
+df$ids<-df$session*100+df$subsession.round_number
+df <- aggregate(df,by = list(df$ids),FUN = mean)
+df<-df[,-1]
 
 
 df$group.p_a[df$group.p_a==0]<-NA

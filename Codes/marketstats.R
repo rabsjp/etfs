@@ -52,12 +52,13 @@ turnover<-function(q1,id){
   return(tov)
 }
 
+turnoverba<-function(q1,id){
+  tov<-tapply(q1,id,mean,na.rm=TRUE)
+  return(tov)
+}
+
 rae(df$group.p_c,df$group.nav,df$uses)
 rae(df$group.p_c,df$group.nav,df$uses)
-
-
-abs((df$group.p_b/(df$group.p_a))/(df$fvb/df$fva)-1)
-pa(df$group.p_a,df$fva,df$uses)
 
 rae_a<-rae(df$group.p_a,df$fva,df$uses)
 rae_b<-rae(df$group.p_b,df$fvb,df$uses)
@@ -70,27 +71,57 @@ wrae_c<-wrae(df$group.p_c,df$fvc,df$group.q_c,df$uses)
 wrae_cnav<-wrae(df$group.p_c,df$group.nav,df$group.q_c,df$uses)
 
 
-rap<-rapdpj(df$group.p_b,df$fvb,df$group.p_a,df$fva,df$uses)
+rap<-dpj(df$group.p_b,df$fvb,df$group.p_a,df$fva,df$uses)
+
 raes<-rbind(rae_a,rae_b,rae_c,rae_cnav,rap)
 wraes<-rbind(wrae_a,wrae_b,rae_c,wrae_cnav)
 
 
-nses<-8
-totala<- c(rep(20*3,nses),rep(10*3,nses))
-totalb<- c(rep(20*3,nses),rep(10*3,nses))
-totalc<- c(rep(20*3,nses),rep(10*3,nses))
+nse2<-16
+nses<-16
+totala<- c(rep(20*3,nse2),rep(10*3,nses))
+totalb<- c(rep(20*3,nse2),rep(10*3,nses))
+totalc<- c(rep(20*3,nse2),rep(10*3,nses))
 
 turnover_a<-turnover(df$group.q_a,df$uses)/totala*100
 turnover_b<-turnover(df$group.q_b,df$uses)/totalb*100
 turnover_c<-turnover(df$group.q_c,df$uses)/totalc*100
 
+turnoverba_a<-turnoverba(df$active_a,df$uses)/totala*100
+turnoverba_b<-turnoverba(df$active_b,df$uses)/totalb*100
+turnoverba_c<-turnoverba(df$active_c,df$uses)/totalc*100
+
 vueltas<-rbind(turnover_a,turnover_b,turnover_c)
+vueltasba<-rbind(turnoverba_a,turnoverba_b,turnoverba_c)
+
 
 vol_a<-disperse(df$group.p_a,df$uses)
 vol_b<-disperse(df$group.p_b,df$uses)
 vol_c<-disperse(df$group.p_c,df$uses)
 
 volatilities<-rbind(vol_a,vol_b,vol_c)
+
+
+#rap
+library("coin")
+dtest<-data.frame(NA)
+#dtest<-cbind(dtest,turnoverba_a[c(10,12,14,16,26,28,30,32)])
+#dtest<-cbind(dtest,turnoverba_b[c(2,4,6,8,18,20,22,24)])
+#dtest<-cbind(dtest,rap[c(10,12,14,16,2,4,6,8)])
+dtest<-cbind(dtest,turnoverba_c[c(18,20,22,24,26,28,30,32)])
+dtest[,1]<-factor(c(rep("dos",4),rep("tres",4)))
+names(dtest)<-c("tre","rap")
+
+oneway_test(rap~tre,data=dtest,distribution="exact")
+wilcox_test(rap~tre,data=dtest,distribution="exact")
+ks.test(dtest$rap[dtest$tre=="dos"],dtest$rap[dtest$tre=="tres"])
+
+oneway_test(rap~tre,data=dtest,distribution="exact",alternative = "greater")
+wilcox_test(rap~tre,data=dtest,distribution="exact",alternative = "greater")
+ks.test(dtest$rap[dtest$tre=="dos"],dtest$rap[dtest$tre=="tres"],alternative = "less")
+
+
+oneway_test(rap~tre,data=dtest,distribution=approximate(nresample=9999),alternative = "greater")
 
 
 cor(df$group.p_a[df$uses==2010],df$group.p_b[df$uses==2010],use="complete.obs")
