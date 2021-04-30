@@ -51,6 +51,17 @@ ce <- (eu*(1-g))^(1/(1-g))
 ce
 
 ```
+The three trader types considered are proposed by DeLong et al. (1990, hereafter DSSW). 
+
+(I) The persistence of bubbles suggests the existence of agents who trade on momentum, purchasing units after price increases as if they expect prices to continue rising, and selling rapidly once a crash occurs. ('trend extrapolators'?). Following DSSW, we denote these traders as feed- back traders. 
+
+(II) The existence of a crash suggests that there are also traders in the population who speculate, but realize that speculation on an upward price movement is unlikely to be profitable very late in the time horizon and thus sell their units at that time, thereby precipitating a crash. We call these traders speculators.
+
+(III) We also include the third type DSSW propose, passive investors, who trade based on fundamental values, purchasing (selling) when prices are below (above) fundamentals. [JP: other definition of passive trading is different. inactivity? you buy the index and sit on it. ]
+
+
+Each subject receives a score with respect to each of the three types, with the score for each type equal to the number of periods in which subject’s behavior is consistent with that type.
+A subject is classified as the type that receives the highest score, provided that the score is greater than 8, and as “other” otherwise. Ties are broken by assigning the corresponding fraction to each type. The number of subjects classified as each type is shown for each session,
 
 
 
@@ -60,6 +71,13 @@ ce
 
 
 
-```{r}
-plot(cars)
-```
+
+
+
+
+
+
+
+
+
+
