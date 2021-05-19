@@ -247,13 +247,22 @@ vol_a<-disperse(df$group.p_a,df$session)
 vol_b<-disperse(df$group.p_b,df$session)
 vol_c<-disperse(df$group.p_c,df$session)
 
+vol_c_ab<-vol_c-vol_a-vol_b
+
 ## Test CNAV and C
 library("coin")
 dtest<-data.frame(NA)
+vtest<-data.frame(NA)
 #dtest<-cbind(dtest,c(rae_c[16:20],rae_cnav[16:20]))
 dtest<-cbind(dtest,c(pa_c[11:15],pa_c[16:20]))
+vtest<-cbind(vtest,c(vol_c_ab[11:15],vol_c_ab[16:20]))
 dtest[,1]<-factor(c(rep("dos",5),rep("tres",5)))
+vtest<-vtest[,1]<-factor(c(rep("dos",5),rep("tres",5)))
 names(dtest)<-c("tre","rap")
+names(vtest)<-c("tre","vap")
+wilcox.test(vol_c_ab[11:15], mu = 0, alternative = "two.sided")
+wilcox.test(vol_c_ab[16:20], mu = 0, alternative = "two.sided")
+
 #atest<-rae_c[16:20]-rae_cnav[16:20]
 #atest<-rae_c[11:15]-rae_cnav[11:15]
 #atest<-rae_cnav[11:15]-rae_cnav[16:20]
@@ -261,6 +270,9 @@ wilcox.test(rd_cnav[11:15], mu = 0, alternative = "two.sided")
 #atest<-trae_cnav[11:15]-trae_c[11:15]
 #wilcox.test(atest, mu = 0, alternative = "two.sided")
 #wilcox.test(rae.nav_cnav[16:20],rae.nav_cnav[16:20], paired = TRUE, alternative = "two.sided")
+
+
+
 
 oneway_test(rap~tre,data=dtest,distribution="exact")
 wilcox_test(rap~tre,data=dtest,distribution="exact")

@@ -75,10 +75,11 @@ xtset uses
 preserve
 keep if subsessionround_number>15
 bootstrap, cluster(session) idcluster(new) group(uses) seed(350): xtreg rad_a dum_z dum_3 dum_m, re 
-bootstrap, cluster(session) idcluster(new) group(uses) seed(350): xtreg rad_a dum_z dum_3 dum_m, re 
-
+bootstrap, cluster(session) idcluster(new) group(uses) seed(350): xtreg rad_a dum_z dum_3 dum_m  subsessionronda, re 
 bootstrap, cluster(session) idcluster(new) group(uses) seed(350): xtreg rad_b dum_z dum_3 dum_m, re 
-
+bootstrap, cluster(session) idcluster(new) group(uses) seed(350): xtreg rad_b dum_z dum_3 dum_m subsessionronda, re 
+bootstrap, cluster(session) idcluster(new) group(uses) seed(350): xtreg rad_ab dum_z dum_3 dum_m subsessionronda, re
+bootstrap, seed(350): xtreg rad_ab dum_z dum_3 dum_m subsessionronda, re
 restore
 
 

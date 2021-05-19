@@ -54,6 +54,8 @@ egen balan1_ab = rowmin(hold_a hold_b)
 replace balan1_ab = balan1_ab + hold_c
 g balan_ab2 = balan_ab/total_hold2
 
+g balan_ab3 = balan_ab2
+replace balan_ab3 = balan_ab2 - 0.6 if participantid_in_session<7
 
 
 preserve
@@ -65,13 +67,24 @@ bootstrap, cluster(session) idcluster(nuevo) seed(200) rep(200): reg balan_ab2 b
 bootstrap, cluster(session) idcluster(nuevo) seed(200) rep(200): reg playercash bomb
 bootstrap, cluster(session) idcluster(nuevo) seed(200) rep(200): reg playercash bomb dum_z
 bootstrap, cluster(session) idcluster(nuevo) seed(200) rep(200): reg playercash bomb dum_z bz
-
-
-
 keep if dum_3==0
 bootstrap, cluster(session) idcluster(nuevo) seed(200) rep(200): reg balan_ab2 bomb 
 bootstrap, cluster(session) idcluster(nuevo) seed(200) rep(200): reg balan_ab2 bomb dum_z bz
 restore
+
+preserve
+keep if subsessionround_number==30
+bootstrap, cluster(session) idcluster(nuevo) seed(200) rep(200): reg balan_ab2 dum_z 
+bootstrap, cluster(session) idcluster(nuevo) seed(200) rep(200): reg balan_ab3 dum_z 
+
+bootstrap, cluster(session) idcluster(nuevo) seed(200) rep(200): reg balan_ab3 dum_z if participantid_in_session < 4
+bootstrap, cluster(session) idcluster(nuevo) seed(200) rep(200): reg balan_ab3 dum_z if participantid_in_session > 3 & participantid_in_session < 7
+bootstrap, cluster(session) idcluster(nuevo) seed(200) rep(200): reg balan_ab3 dum_z if participantid_in_session > 6
+restore
+
+
+
+
 
 
 reg balan_ab bomb dum_z dum_3 dum_m
